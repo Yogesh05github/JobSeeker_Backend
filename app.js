@@ -1,48 +1,43 @@
 import express from "express";
-import dotenv from "dotenv"
-import cors from 'cors'
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
-
-import userRouter from './routes/userRouter.js'
+import userRouter from './routes/userRouter.js';
 import jobRouter from './routes/jobRouter.js';
-import applicationRouter from './routes/applicationRouter.js'
-
-import {dbConnection} from './database/dbConnection.js'
-import {errorMiddleware} from './middleware/error.js'
+import applicationRouter from './routes/applicationRouter.js';
+import { dbConnection } from './database/dbConnection.js';
+import { errorMiddleware } from './middleware/error.js';
 
 const app = express();
-dotenv.config()
-// , 'http://localhost:5173'
-app.use(cors({
-    origin: ['https://job-seeker-frontend-beta.vercel.app' ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
-  }));
 
+// Configure CORS to allow requests from the frontend
+app.use(cors({
+    origin: ['https://job-seeker-frontend-beta.vercel.app', 'http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true, // Allow cookies to be sent with requests
+}));
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(fileUpload ({
-     useTempFiles: true,
-     tempFileDir :"/tmp/"
-})) 
-
+app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/"
+}));
 
 dbConnection();
 
+// Base route (optional)
 app.get('/', (req, res) => {
     res.send('Welcome to the Job Seeker API!');
 });
-app.use('/api/v1/user' , userRouter);
-app.use('/api/v1/application' , applicationRouter);
-app.use("/api/v1/job" , jobRouter);
-app.use(errorMiddleware)
 
+// Register routes
+app.use('/api/v1/user', userRouter);
+app.use('/api/v1/job', jobRouter);
+app.use('/api/v1/application', applicationRouter);
 
- 
-
+// Error handling middleware
+app.use(errorMiddleware);
 
 export default app;
-
