@@ -32,16 +32,18 @@ app.use(fileUpload ({
 
 dbConnection();
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the Job Seeker API!');
-});
-app.use('/api/v1/user' , userRouter);
-app.use('/api/v1/application' , applicationRouter);
-app.use("/api/v1/job" , jobRouter);
+// app.get('/', (req, res) => {
+//   res.send('Welcome to the Job Seeker API!');
+// });
+
+// app.use('/api/v1/user' , userRouter);
+// app.use('/api/v1/application' , applicationRouter);
+// app.use("/api/v1/job" , jobRouter);
 app.use(errorMiddleware)
 
 
- 
+ // Routes
+app.use('/', require('./routes'))
 
 
 export default app;
