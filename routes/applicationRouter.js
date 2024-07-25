@@ -3,8 +3,6 @@ import {employerGetAllApplications , JobSeekerDeleteApplication , JobSeekerGetAl
 import { isAuthorized } from '../middleware/auth.js';
 const router = express.Router();
 
-
-
 router.get("/jobseeker/getall" , isAuthorized ,JobSeekerGetAllApplications);
 router.get("/employer/getall" ,isAuthorized, employerGetAllApplications);
 router.delete("/delete/:id" ,isAuthorized, JobSeekerDeleteApplication)
