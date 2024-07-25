@@ -10,11 +10,11 @@ import { errorMiddleware } from './middleware/error.js';
 
 const app = express();
 
-// Configure CORS to allow requests from the frontend
+// Set up CORS
 app.use(cors({
     origin: ['https://job-seeker-frontend-beta.vercel.app', 'http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true, // Allow cookies to be sent with requests
+    credentials: true,
 }));
 
 app.use(cookieParser());
@@ -25,12 +25,8 @@ app.use(fileUpload({
     tempFileDir: "/tmp/"
 }));
 
+// Connect to database
 dbConnection();
-
-// Base route (optional)
-app.get('/', (req, res) => {
-    res.send('Welcome to the Job Seeker API!');
-});
 
 // Register routes
 app.use('/api/v1/user', userRouter);
