@@ -15,7 +15,7 @@ const app = express();
 dotenv.config()
 
 app.use(cors({
-    origin: ['https://job-zee-frontend.vercel.app' , 'http://localhost:5173' ],
+    origin: ['https://job-seeker-frontend-beta.vercel.app' , 'http://localhost:5173' ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   }));
