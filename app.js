@@ -14,11 +14,7 @@ import {errorMiddleware} from './middleware/error.js'
 const app = express();
 dotenv.config()
 // , 'http://localhost:5173'
-app.use(cors({
-    origin: ['https://job-seeker-frontend-beta.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
-  }));
+app.use(cors);
 
 
 app.use(cookieParser());
