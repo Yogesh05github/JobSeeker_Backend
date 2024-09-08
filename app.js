@@ -14,7 +14,7 @@ import {errorMiddleware} from './middleware/error.js'
 const app = express();
 dotenv.config()
 // , 'http://localhost:5173'
-app.use(cors);
+app.use(cors());
 
 
 app.use(cookieParser());
