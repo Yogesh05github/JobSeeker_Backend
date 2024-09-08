@@ -36,10 +36,7 @@ app.use(fileUpload({
 }));
 
 // Connect to the database and handle errors
-dbConnection().catch((err) => {
-    console.error('Database connection failed:', err);
-    process.exit(1); // Exit the process if DB connection fails
-});
+dbConnection();
 
 // Basic route to test server
 app.get('/', (req, res) => {
