@@ -1,5 +1,6 @@
 import app from './app.js';
 import cloudinary from 'cloudinary';
+import dotenv from "dotenv"
 
 
 cloudinary.v2.config({
@@ -10,7 +11,7 @@ cloudinary.v2.config({
 
 })
  
-
-app.listen(process.env.PORT , ()=> {
-      console.log(`Server listening on port ${process.env.PORT}`);
+const port  = process.env.PORT||8000;
+app.listen(port , ()=> {
+      console.log(`Server listening on port ${port}`);
 })
